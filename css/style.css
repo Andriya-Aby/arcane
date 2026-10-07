@@ -1,0 +1,1443 @@
+/* ==========================================================================
+   FISAT (Federal Institute of Science and Technology) - THE VIBE EDITION
+   Aesthetic: Electric Neo-Brutalist & Cyber-Glassmorphism
+   "Not your regular engineering college. Built for the bold."
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Default Vibe: Electric Cyber (Deep Obsidian + Neon Lime + Cyber Violet) */
+  --bg-main: #090d16;
+  --bg-card: rgba(18, 26, 43, 0.75);
+  --bg-card-hover: rgba(28, 39, 64, 0.9);
+  --bg-elevated: #151d30;
+  
+  --primary: #ccff00;          /* Electric Acid Lime */
+  --primary-glow: rgba(204, 255, 0, 0.35);
+  --primary-contrast: #090d16;
+  
+  --secondary: #ff007f;        /* Hyper Neon Pink / Magenta */
+  --secondary-glow: rgba(255, 0, 127, 0.35);
+  
+  --accent: #00f5d4;           /* Cyber Cyan / Aqua */
+  --accent-glow: rgba(0, 245, 212, 0.35);
+
+  --purple: #8b5cf6;           /* Electric Violet */
+  --purple-glow: rgba(139, 92, 246, 0.35);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  
+  --border: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(204, 255, 0, 0.4);
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-full: 9999px;
+
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+  --shadow-neo: 5px 5px 0px rgba(0, 0, 0, 0.8);
+  --shadow-neon: 0 0 25px var(--primary-glow);
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   VIBE MODES (Theme presets)
+   ========================================================================== */
+
+/* 1. Synthwave Sunset */
+[data-vibe="synthwave"] {
+  --bg-main: #110726;
+  --bg-card: rgba(33, 14, 69, 0.75);
+  --bg-card-hover: rgba(48, 20, 100, 0.9);
+  --bg-elevated: #281052;
+  --primary: #ff007f;          /* Radical Pink */
+  --primary-glow: rgba(255, 0, 127, 0.4);
+  --primary-contrast: #ffffff;
+  --secondary: #00f5d4;        /* Cyan */
+  --secondary-glow: rgba(0, 245, 212, 0.4);
+  --accent: #ffbe0b;           /* Sunset Amber */
+  --border-highlight: rgba(255, 0, 127, 0.4);
+}
+
+/* 2. Cyber Matrix (Green / Hacker) */
+[data-vibe="matrix"] {
+  --bg-main: #050d0a;
+  --bg-card: rgba(10, 30, 20, 0.75);
+  --bg-card-hover: rgba(16, 45, 30, 0.9);
+  --bg-elevated: #0d261a;
+  --primary: #00ff88;          /* Matrix Lime */
+  --primary-glow: rgba(0, 255, 136, 0.4);
+  --primary-contrast: #050d0a;
+  --secondary: #00e5ff;        /* Neon Ice */
+  --secondary-glow: rgba(0, 229, 255, 0.4);
+  --accent: #fcee0a;           /* Cyber Yellow */
+  --border-highlight: rgba(0, 255, 136, 0.4);
+}
+
+/* 3. Midnight Ocean */
+[data-vibe="ocean"] {
+  --bg-main: #031226;
+  --bg-card: rgba(7, 36, 74, 0.75);
+  --bg-card-hover: rgba(12, 53, 107, 0.9);
+  --bg-elevated: #0a2f60;
+  --primary: #38bdf8;          /* Sky Blue */
+  --primary-glow: rgba(56, 189, 248, 0.4);
+  --primary-contrast: #031226;
+  --secondary: #a855f7;        /* Purple */
+  --secondary-glow: rgba(168, 85, 247, 0.4);
+  --accent: #2dd4bf;           /* Teal */
+  --border-highlight: rgba(56, 189, 248, 0.4);
+}
+
+/* 4. Sunlight Daybreak (Fresh light mode) */
+[data-vibe="daybreak"] {
+  --bg-main: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: #ffffff;
+  --bg-elevated: #f1f5f9;
+  --primary: #2563eb;          /* Electric Royal Blue */
+  --primary-glow: rgba(37, 99, 235, 0.2);
+  --primary-contrast: #ffffff;
+  --secondary: #f43f5e;        /* Rose Pink */
+  --secondary-glow: rgba(244, 63, 94, 0.2);
+  --accent: #059669;           /* Emerald */
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #94a3b8;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-highlight: rgba(37, 99, 235, 0.4);
+  --shadow-neo: 4px 4px 0px rgba(15, 23, 42, 0.9);
+}
+
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background-image: 
+    radial-gradient(circle at 15% 15%, var(--primary-glow) 0%, transparent 35%),
+    radial-gradient(circle at 85% 65%, var(--secondary-glow) 0%, transparent 35%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+/* ==========================================================================
+   Stickers, Tags & Badges (Outgoing & Playful)
+   ========================================================================== */
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--border-radius-full);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  transform: rotate(-1.5deg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sticker:hover {
+  transform: rotate(1deg) scale(1.05);
+}
+
+.sticker-lime {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border: 2px solid var(--primary-contrast);
+}
+
+.sticker-pink {
+  background: var(--secondary);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.sticker-cyan {
+  background: var(--accent);
+  color: #090d16;
+  border: 2px solid #090d16;
+}
+
+.sticker-glass {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--border-radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+  box-shadow: 4px 4px 0px var(--secondary);
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--secondary);
+}
+
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--secondary);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #ffffff;
+  border-color: var(--secondary);
+  box-shadow: 4px 4px 0px var(--primary);
+}
+
+.btn-secondary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--primary);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-main);
+  border-color: var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.825rem;
+  border-radius: var(--border-radius-sm);
+}
+
+/* ==========================================================================
+   Continuous Electric Marquee
+   ========================================================================== */
+.marquee-ribbon {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  padding: 0.85rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  transform: rotate(-1deg) scale(1.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 20;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 3rem;
+  animation: marqueeScroll 20s linear infinite;
+  align-items: center;
+}
+
+.marquee-content span {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   Navigation Header
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 1rem;
+  z-index: 1000;
+  margin: 0 auto;
+  max-width: 1240px;
+  padding: 0 1rem;
+}
+
+.nav-container {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: var(--transition);
+}
+
+.site-header.scrolled .nav-container {
+  border-color: var(--border-highlight);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-emblem {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #090d16;
+  font-size: 1.25rem;
+  font-weight: 900;
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.brand-text h1 {
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.brand-text .sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brand-vibe-tag {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-size: 0.885rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.4rem 0.2rem;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text-main);
+}
+
+.nav-link.active::after, .nav-link:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+  transform: rotate(8deg);
+}
+
+.mobile-toggle {
+  display: none;
+}
+
+/* ==========================================================================
+   Hero Section: Electric, Outgoing & Punchy
+   ========================================================================== */
+.hero {
+  position: relative;
+  padding: 6.5rem 0 5rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-glow-sphere {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(ellipse, var(--secondary-glow) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero-stickers-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-title .highlight-box {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  padding: 0.1rem 0.6rem;
+  border-radius: var(--border-radius-sm);
+  transform: rotate(-1.5deg);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.hero-subtitle {
+  font-size: 1.35rem;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+/* Floating Vibe Selector Bar */
+.vibe-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--border-radius-full);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.vibe-pill {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.775rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.vibe-pill.active, .vibe-pill:hover {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+/* ==========================================================================
+   Bento Grid Layout: The FISAT Ecosystem
+   ========================================================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.bento-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: 2.25rem;
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bento-item:hover {
+  border-color: var(--border-highlight);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.bento-item.col-8 { grid-column: span 8; }
+.bento-item.col-4 { grid-column: span 4; }
+.bento-item.col-6 { grid-column: span 6; }
+.bento-item.col-12 { grid-column: span 12; }
+
+.bento-badge-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.bento-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.bento-big-stat {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  letter-spacing: -0.03em;
+}
+
+/* ==========================================================================
+   Interactive "Find Your Vibe" Branch Quiz Card
+   ========================================================================== */
+.quiz-box {
+  background: linear-gradient(135deg, rgba(204, 255, 0, 0.05), rgba(255, 0, 127, 0.08));
+  border: 2px dashed var(--border-highlight);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.quiz-option-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 1.25rem 1rem;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.quiz-option-btn i {
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.quiz-option-btn:hover, .quiz-option-btn.selected {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 4px 4px 0px var(--secondary);
+}
+
+.quiz-option-btn:hover i, .quiz-option-btn.selected i {
+  color: var(--primary-contrast);
+}
+
+.quiz-result-card {
+  background: var(--bg-elevated);
+  border: 2px solid var(--primary);
+  border-radius: var(--border-radius-md);
+  padding: 1.75rem;
+  margin-top: 1.5rem;
+  display: none;
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   Programs Grid: Modern Cyber Cards
+   ========================================================================== */
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.program-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.program-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-highlight);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.program-card:hover::before {
+  opacity: 1;
+}
+
+.program-card h3 {
+  font-size: 1.35rem;
+  margin: 0.75rem 0 0.5rem;
+  color: var(--text-main);
+}
+
+.program-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   Placements: Sneaker-Drop / Hall of Fame Vibe
+   ========================================================================== */
+.placements-spotlight {
+  background: linear-gradient(135deg, #10192e 0%, #0a0e1a 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: 4rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.placements-spotlight::after {
+  content: 'BAG SECURED';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+}
+
+/* Recruiters Tag Cloud */
+.recruiters-tagcloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.company-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--border-radius-full);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: var(--transition);
+}
+
+.company-tag:hover {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+  transform: scale(1.05) rotate(-1deg);
+}
+
+/* ==========================================================================
+   Campus Fests & Life: Pure Hype
+   ========================================================================== */
+.fest-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.fest-card {
+  position: relative;
+  min-height: 380px;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.fest-card.bharatham {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(9, 13, 22, 0.95) 100%),
+              radial-gradient(circle at 80% 20%, #ff007f 0%, #3b0764 100%);
+}
+
+.fest-card.Arcane {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(9, 13, 22, 0.95) 100%),
+              radial-gradient(circle at 20% 20%, #00f5d4 0%, #064e3b 100%);
+}
+
+.fest-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.fest-card h3 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.fest-card p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Interactive Calculator: Cyberpunk Form
+   ========================================================================== */
+.calc-card-vibe {
+  background: var(--bg-card);
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* ==========================================================================
+   Modals & Toast System
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--border-radius-lg);
+  max-width: 650px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(20px);
+  transition: var(--transition);
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.modal-close:hover {
+  color: var(--secondary);
+  transform: rotate(90deg);
+}
+
+/* Toast Container */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toast {
+  background: var(--bg-elevated);
+  color: var(--text-main);
+  border: 1px solid var(--border-highlight);
+  border-left: 5px solid var(--primary);
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 320px;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: #050810;
+  border-top: 1px solid var(--border);
+  padding: 5rem 0 2rem;
+  color: var(--text-muted);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Gym & Fitness Center (The Iron Den)
+   ========================================================================== */
+.gym-schedule-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.gym-equip-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.gym-equip-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.gym-equip-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-sm);
+  background: rgba(204, 255, 0, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Canteen & Hangout Hub (Campus Fuel)
+   ========================================================================== */
+.crave-box {
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.08), rgba(204, 255, 0, 0.05));
+  border: 2px dashed var(--secondary);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.mood-selector-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.mood-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--border-radius-full);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.885rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mood-btn:hover, .mood-btn.active {
+  background: var(--secondary);
+  color: #ffffff;
+  border-color: var(--secondary);
+  transform: scale(1.05);
+  box-shadow: 3px 3px 0px var(--primary);
+}
+
+.crave-result-card {
+  background: var(--bg-elevated);
+  border: 2px solid var(--primary);
+  border-radius: var(--border-radius-md);
+  padding: 1.75rem;
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: left;
+  animation: popIn 0.3s ease;
+}
+
+.canteen-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.canteen-item-row:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   Student Projects Showcase (Innovation Garage)
+   ========================================================================== */
+.projects-filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.25rem 0;
+}
+
+.project-status-pill {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--border-radius-full);
+}
+
+.status-funded { background: rgba(0, 245, 212, 0.15); color: var(--accent); border: 1px solid var(--accent); }
+.status-fablab { background: rgba(204, 255, 0, 0.15); color: var(--primary); border: 1px solid var(--primary); }
+.status-award { background: rgba(255, 0, 127, 0.15); color: var(--secondary); border: 1px solid var(--secondary); }
+
+/* ==========================================================================
+   Central Library (Learning Resource Center)
+   ========================================================================== */
+.library-image-container {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  max-height: 480px;
+}
+
+.library-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.library-image-container:hover img {
+  transform: scale(1.03);
+}
+
+.library-overlay-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 1.25rem;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.author-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--border-radius-md);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.author-pill:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.author-pill strong {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.author-pill span {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Campus Map & Wayfinder
+   ========================================================================== */
+.campus-map-frame {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.campus-map-frame img {
+  width: 100%;
+  display: block;
+}
+
+.map-landmark-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: var(--transition);
+}
+
+.map-landmark-pill:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Interactive Phone Simulator Mode (View in Mobile)
+   ========================================================================== */
+.phone-sim-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(4, 7, 13, 0.92);
+  backdrop-filter: blur(16px);
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.phone-sim-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.phone-sim-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.phone-casing {
+  width: 390px;
+  height: 760px;
+  max-height: 85vh;
+  background: #1e1e24;
+  border-radius: 50px;
+  border: 12px solid #2d2d38;
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.1),
+    0 25px 60px rgba(0, 0, 0, 0.9),
+    0 0 40px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.phone-casing.pixel {
+  border-radius: 40px;
+  border-width: 10px;
+  border-color: #3b3b4a;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 26px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.notch-camera {
+  width: 10px;
+  height: 10px;
+  background: #0a1128;
+  border-radius: 50%;
+  border: 1px solid #1a233a;
+}
+
+.phone-status-bar {
+  height: 42px;
+  background: var(--bg-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  z-index: 40;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-screen-frame {
+  flex-grow: 1;
+  width: 100%;
+  height: calc(100% - 42px);
+  border: none;
+  background: var(--bg-main);
+}
+
+.phone-home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Mobile Bottom Quick Navigation Bar (Real Mobile Screens)
+   ========================================================================== */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(9, 13, 22, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  z-index: 999;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.m-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: var(--font-display);
+  font-size: 0.685rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.m-nav-item i {
+  font-size: 1.15rem;
+}
+
+.m-nav-item:hover, .m-nav-item.active {
+  color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mobile-bottom-bar {
+    display: flex;
+  }
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
